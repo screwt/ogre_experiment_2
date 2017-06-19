@@ -26,7 +26,8 @@ using namespace Demo;
 namespace Demo
 {
 	EmptyProjectGameState::EmptyProjectGameState( const Ogre::String &helpDescription ) :
-		TutorialGameState( helpDescription )
+	  TutorialGameState( helpDescription ),
+	  mSceneNode( 0 )
 	{
     }
     //-----------------------------------------------------------------------------------
@@ -34,6 +35,20 @@ namespace Demo
     {
         mCameraController = new CameraController( mGraphicsSystem, false );
 
+	Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
+
+        Ogre::Item *item = sceneManager->createItem( "Cube_d.mesh",
+                                                     Ogre::ResourceGroupManager::
+                                                     AUTODETECT_RESOURCE_GROUP_NAME,
+                                                     Ogre::SCENE_DYNAMIC );
+
+        mSceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
+                createChildSceneNode( Ogre::SCENE_DYNAMIC );
+
+        mSceneNode->attachObject( item );
+
+        	
+	
         TutorialGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
