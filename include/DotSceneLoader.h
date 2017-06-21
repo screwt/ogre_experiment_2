@@ -7,8 +7,11 @@
 #include <OgreQuaternion.h>
 #include <OgreResourceGroupManager.h>
 #include <OgreSceneNode.h>
+#include <OgreItem.h>
 #include <vector>
- 
+#include <OgreMeshManager2.h>
+
+
 #include "rapidxml.hpp"
  
     // Forward declarations
@@ -16,8 +19,8 @@
     {
         class SceneManager;
         class SceneNode;
-        class TerrainGroup;
-        class TerrainGlobalOptions;
+        //class TerrainGroup;
+        //class TerrainGlobalOptions;
     }
  
     class nodeProperty
@@ -35,7 +38,7 @@
     class DotSceneLoader
     {
     public:
-        Ogre::TerrainGlobalOptions *mTerrainGlobalOptions;
+      //Ogre::TerrainGlobalOptions *mTerrainGlobalOptions;
  
         DotSceneLoader();
         virtual ~DotSceneLoader();
@@ -43,7 +46,7 @@
         void parseDotScene(const Ogre::String &SceneName, const Ogre::String &groupName, Ogre::SceneManager *yourSceneMgr, Ogre::SceneNode *pAttachNode = NULL, const Ogre::String &sPrependNode = "");
         Ogre::String getProperty(const Ogre::String &ndNm, const Ogre::String &prop);
  
-        Ogre::TerrainGroup* getTerrainGroup() { return mTerrainGroup; }
+        //Ogre::TerrainGroup* getTerrainGroup() { return mTerrainGroup; }
  
         std::vector<nodeProperty> nodeProperties;
         std::vector<Ogre::String> staticObjects;
@@ -59,7 +62,7 @@
         void processTerrainPage(rapidxml::xml_node<>* XMLNode);
         void processBlendmaps(rapidxml::xml_node<>* XMLNode);
         void processUserDataReference(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent = 0);
-        void processUserDataReference(rapidxml::xml_node<>* XMLNode, Ogre::Entity *pEntity);
+        //void processUserDataReference(rapidxml::xml_node<>* XMLNode, Ogre::Entity *pEntity);
         void processOctree(rapidxml::xml_node<>* XMLNode);
         void processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent = 0);
         void processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent = 0);
@@ -67,7 +70,9 @@
         void processNode(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent = 0);
         void processLookTarget(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
         void processTrackTarget(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
-        void processEntity(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
+        //void processEntity(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
+	void processEntity(rapidxml::xml_node<>* XMLNode, Ogre::Item *pParent);
+	void processItem(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent); 
         void processParticleSystem(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
         void processBillboardSet(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
         void processPlane(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent);
@@ -94,7 +99,7 @@
         Ogre::SceneNode *mAttachNode;
         Ogre::String m_sGroupName;
         Ogre::String m_sPrependNode;
-        Ogre::TerrainGroup* mTerrainGroup;
+        //Ogre::TerrainGroup* mTerrainGroup;
         Ogre::Vector3 mTerrainPosition;
         Ogre::Vector3 mLightDirection;
     };

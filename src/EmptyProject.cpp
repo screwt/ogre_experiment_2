@@ -40,7 +40,12 @@ namespace Demo
     {
         virtual Ogre::CompositorWorkspace* setupCompositor()
         {
-            return GraphicsSystem::setupCompositor();
+	  
+	  // see ../Data/scripts/Compositors/EmptyProject.compositor permit shadow casting
+	  Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
+	  return compositorManager->addWorkspace( mSceneManager, mRenderWindow, mCamera,
+                                                    "EmptyProjectWorkspace", true );
+
         }
 
         virtual void setupResources(void)
