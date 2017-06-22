@@ -46,18 +46,17 @@ namespace Demo
 
 	Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
         
-
+	/*
         Ogre::Item *item = sceneManager->createItem( "Cube_d.mesh",
                                                      Ogre::ResourceGroupManager::
                                                      AUTODETECT_RESOURCE_GROUP_NAME,
-                                                     Ogre::SCENE_DYNAMIC );
-
+                                                     Ogre::SCENE_DYNAMIC );	
         mSceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
                 createChildSceneNode( Ogre::SCENE_DYNAMIC );
-
         mSceneNode->attachObject( item );
-
-	sceneManager->setForwardClustered( true, 16, 8, 24, 96, 5, 500 );
+	*/
+	
+	//sceneManager->setForwardClustered( true, 16, 8, 24, 96, 5, 500 );
 
 	
 
@@ -92,7 +91,7 @@ namespace Demo
 
 
 
-
+	/*
         Ogre::v1::MeshPtr planeMeshV1 = Ogre::v1::MeshManager::getSingleton().createPlane( "Plane v1",
                                             Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
                                             Ogre::Plane( Ogre::Vector3::UNIT_Y, 1.0f ), 5000.0f, 5000.0f,
@@ -131,7 +130,7 @@ namespace Demo
         light->setAttenuationBasedOnRadius( 100.0f, 0.001f );
 	
 	
-	
+	*/
         TutorialGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
