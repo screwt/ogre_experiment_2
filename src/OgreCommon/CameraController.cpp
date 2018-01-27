@@ -121,7 +121,7 @@ namespace Demo
         float width  = static_cast<float>( mGraphicsSystem->getRenderWindow()->getWidth() );
         float height = static_cast<float>( mGraphicsSystem->getRenderWindow()->getHeight() );
 
-        mCameraYaw   += -arg.motion.xrel / width;
-        mCameraPitch += -arg.motion.yrel / height;
+		mCameraYaw += -arg.motion.xrel / width / 10;
+        mCameraPitch += -arg.motion.yrel / height / 10;
     }
 }

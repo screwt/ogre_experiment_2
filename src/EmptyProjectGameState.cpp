@@ -42,7 +42,7 @@ namespace Demo
     //-----------------------------------------------------------------------------------
 	void EmptyProjectGameState::createScene01(void)
     {
-        mCameraController = new CameraController( mGraphicsSystem, false );
+        mCameraController = new CameraController( mGraphicsSystem, true );
 
 	Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
 

@@ -392,7 +392,9 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
  
     // Create the camera
     Ogre::Camera *pCamera = mSceneMgr->createCamera(name);
- 
+	pCamera->getParentSceneNode()->detachObject(pCamera);
+	pParent->attachObject(pCamera);
+
     //TODO: make a flag or attribute indicating whether or not the camera should be attached to any parent node.
     //if(pParent)
     //    pParent->attachObject(pCamera);
