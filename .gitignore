@@ -24,3 +24,9 @@ OvhApi.py
 \#*.*\#
 *.*~
 .hg
+
+
+EmptyProject.dir/
+Win32/
+bin/
+build2/
