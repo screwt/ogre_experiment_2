@@ -44,7 +44,6 @@ if( NOT APPLE )
 endif()
 
 include( CMake/Dependencies/OGRE.cmake )
-
 setupOgre( OGRE_SOURCE, OGRE_BINARIES, OGRE_LIBRARIES )
 
 # Setup our application

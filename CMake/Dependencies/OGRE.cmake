@@ -279,8 +279,8 @@ setupPluginFileFromTemplate( "RelWithDebInfo" )
 message( STATUS "Copying DLLs and generating Plugins.cfg for MinSizeRel" )
 setupPluginFileFromTemplate( "MinSizeRel" )
 
-setupResourceFileFromTemplate()
-setupOgreSamplesCommon()
+#setupResourceFileFromTemplate()
+#setupOgreSamplesCommon()
 
 endmacro()
 
