@@ -18,8 +18,8 @@ bin/*
 build/
 Dependencies/Ogre
 build2/
-include/OgreCommon/
-src/OgreCommon/
+#include/OgreCommon/
+#src/OgreCommon/
 x64/
 
 !bin/Data
