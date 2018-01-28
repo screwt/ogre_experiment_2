@@ -1,14 +1,4 @@
 build/
-bin/Debug
-bin/MinSizeRel
-bin/Release
-bin/RelWithDebInfo
-bin/Data/Hlms/Common
-bin/Data/Hlms/Pbs
-bin/Data/Hlms/Unlit
-bin/Data/Materials/Common
-bin/Data/DebugPack.zip
-bin/Data/resources2.cfg
 
 Dependencies/Ogre
 
@@ -25,10 +15,10 @@ OvhApi.py
 *.*~
 .hg
 
-
 EmptyProject.dir/
 Win32/
-!bin/Data/*
-
 bin/*
+!bin/Data
+!bin/Debug/plugins_d.cfg
+
 build2/
