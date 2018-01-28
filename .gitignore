@@ -23,3 +23,4 @@ src/OgreCommon/
 x64/
 
 !bin/Data
+*.log
