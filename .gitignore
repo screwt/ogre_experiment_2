@@ -22,3 +22,7 @@ bin/*
 !bin/Debug/plugins_d.cfg
 
 build2/
+
+include/OgreCommon/
+src/OgreCommon/
+x64/
