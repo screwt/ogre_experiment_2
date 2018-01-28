@@ -30,3 +30,6 @@ EmptyProject.dir/
 Win32/
 bin/
 build2/
+
+include/OgreCommon/
+src/OgreCommon/
