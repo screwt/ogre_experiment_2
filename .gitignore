@@ -28,5 +28,7 @@ OvhApi.py
 
 EmptyProject.dir/
 Win32/
-bin/
+!bin/Data/*
+
+bin/*
 build2/
