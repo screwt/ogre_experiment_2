@@ -7,12 +7,17 @@
 
 namespace Demo
 {
+  struct GameEntity;
+  struct MovableObjectDefinition;
+
+  
 	class EmptyProjectGameState : public TutorialGameState
     {
         virtual void generateDebugText( float timeSinceLast, Ogre::String &outText );
-
+	
+	Ogre::SceneNode *mSceneNode;	
     public:
-		EmptyProjectGameState( const Ogre::String &helpDescription );
+	EmptyProjectGameState( const Ogre::String &helpDescription );
 
         virtual void createScene01(void);
 

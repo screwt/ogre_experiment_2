@@ -1,5 +1,7 @@
 
 #include "EmptyProjectGameState.h"
+#include "DotSceneLoader.h"
+
 #include "CameraController.h"
 #include "GraphicsSystem.h"
 
@@ -13,6 +15,11 @@
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
 
+#include "OgreHlmsManager.h"
+#include "OgreHlms.h"
+#include "Compositor/OgreCompositorWorkspace.h"
+
+#include "OgreHlmsPbs.h"
 #include "OgreHlmsPbsDatablock.h"
 #include "OgreHlmsSamplerblock.h"
 
@@ -21,18 +28,27 @@
 #include "OgreHlmsTextureManager.h"
 #include "OgreHlmsPbs.h"
 
+#include "Compositor/OgreCompositorShadowNode.h"
+
 using namespace Demo;
 
 namespace Demo
 {
 	EmptyProjectGameState::EmptyProjectGameState( const Ogre::String &helpDescription ) :
-		TutorialGameState( helpDescription )
+	  TutorialGameState( helpDescription ),
+	  mSceneNode( 0 )
 	{
     }
     //-----------------------------------------------------------------------------------
 	void EmptyProjectGameState::createScene01(void)
     {
-        mCameraController = new CameraController( mGraphicsSystem, false );
+        mCameraController = new CameraController( mGraphicsSystem, true );
+
+	Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
+
+	DotSceneLoader loader;
+	loader.parseDotScene("test.scene","General", sceneManager);
+
 
         TutorialGameState::createScene01();
     }

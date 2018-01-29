@@ -158,8 +158,11 @@ function( setupOgreSamplesCommon )
 		${CMAKE_SOURCE_DIR}/include/OgreCommon
 		${CMAKE_SOURCE_DIR}/src/OgreCommon/" )
 	include_directories( "${CMAKE_SOURCE_DIR}/include/OgreCommon/" )
-	file( COPY "${OGRE_SOURCE}/Samples/2.0/Common/include/"	DESTINATION "${CMAKE_SOURCE_DIR}/include/OgreCommon/" )
-	file( COPY "${OGRE_SOURCE}/Samples/2.0/Common/src/"		DESTINATION "${CMAKE_SOURCE_DIR}/src/OgreCommon/" )
+	
+	#-- do not copy files, they are already in the repo
+
+	#file( COPY "${OGRE_SOURCE}/Samples/2.0/Common/include/"	DESTINATION "${CMAKE_SOURCE_DIR}/include/OgreCommon/" )
+	#file( COPY "${OGRE_SOURCE}/Samples/2.0/Common/src/"		DESTINATION "${CMAKE_SOURCE_DIR}/src/OgreCommon/" )
 endfunction()
 
 #----------------------------------------------------------------------------------------
@@ -279,7 +282,7 @@ setupPluginFileFromTemplate( "RelWithDebInfo" )
 message( STATUS "Copying DLLs and generating Plugins.cfg for MinSizeRel" )
 setupPluginFileFromTemplate( "MinSizeRel" )
 
-setupResourceFileFromTemplate()
+#setupResourceFileFromTemplate()
 setupOgreSamplesCommon()
 
 endmacro()

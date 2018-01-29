@@ -22,8 +22,11 @@
 #include "Compositor/OgreCompositorManager2.h"
 
 #include "OgreOverlaySystem.h"
+#include "OgreOverlayManager.h"
 
 #include "OgreWindowEventUtilities.h"
+
+#include "OgreLogManager.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -33,6 +36,8 @@
     #include "OSX/macUtils.h"
     #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
         #include "System/iOS/iOSUtils.h"
+    #else
+        #include "System/OSX/OSXUtils.h"
     #endif
 #endif
 
@@ -64,36 +69,48 @@ namespace Demo
     //-----------------------------------------------------------------------------------
     GraphicsSystem::~GraphicsSystem()
     {
-        assert( !mRoot && "deinitialize() not called!!!" );
+        if( mRoot )
+        {
+            Ogre::LogManager::getSingleton().logMessage(
+                        "WARNING: GraphicsSystem::deinitialize() not called!!!", Ogre::LML_CRITICAL );
+        }
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::initialize( const Ogre::String &windowTitle )
     {
     #if OGRE_USE_SDL2
-        if( SDL_Init( SDL_INIT_EVERYTHING ) != 0 )
+        //if( SDL_Init( SDL_INIT_EVERYTHING ) != 0 )
+        if( SDL_Init( SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK |
+                      SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS ) != 0 )
         {
             OGRE_EXCEPT( Ogre::Exception::ERR_INTERNAL_ERROR, "Cannot initialize SDL2!",
                          "GraphicsSystem::initialize" );
         }
     #endif
 
+    #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+        // Note:  macBundlePath works for iOS too. It's misnamed.
+        mResourcePath = Ogre::macBundlePath() + "/Contents/Resources/";
+    #elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+        mResourcePath = Ogre::macBundlePath() + "/";
+    #endif
+
         Ogre::String pluginsPath;
         // only use plugins.cfg if not static
     #ifndef OGRE_STATIC_LIB
-    #if OGRE_DEBUG_MODE
-        pluginsPath = mPluginsPath + "plugins_d.cfg";
+    #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+         mPluginsPath += mResourcePath;
+    #endif
+    #if OGRE_DEBUG_MODE && !((OGRE_PLATFORM == OGRE_PLATFORM_APPLE) || (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS))
+        pluginsPath = mResourcePath + "plugins_d.cfg";
     #else
-        pluginsPath = mPluginsPath + "plugins.cfg";
+        pluginsPath = mResourcePath + "plugins.cfg";
     #endif
     #endif
 
         mRoot = OGRE_NEW Ogre::Root( pluginsPath,
-                                     mWriteAccessFolder + "ogre.cfg",
-                                     mWriteAccessFolder + "Ogre.log" );
-
-    #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE || OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
-        mResourcePath = Ogre::macBundlePath() + '/';
-    #endif
+                                     mResourcePath + "ogre.cfg",
+                                     mResourcePath + "Ogre.log" );
 
         mStaticPluginLoader.install( mRoot );
 
@@ -235,6 +252,11 @@ namespace Demo
     #endif
 
         BaseSystem::initialize();
+
+#if OGRE_PROFILING
+        Ogre::Profiler::getSingleton().setEnabled( true );
+        Ogre::Profiler::getSingleton().endProfile( "" );
+#endif
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::deinitialize(void)
@@ -388,7 +410,7 @@ namespace Demo
     void GraphicsSystem::addResourceLocation( const Ogre::String &archName, const Ogre::String &typeName,
                                               const Ogre::String &secName )
     {
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE || OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+#if (OGRE_PLATFORM == OGRE_PLATFORM_APPLE) || (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS)
         // OS X does not set the working directory relative to the app,
         // In order to make things portable on OS X we need to provide
         // the loading with it's own bundle path location
@@ -433,55 +455,79 @@ namespace Demo
         Ogre::ConfigFile cf;
         cf.load( mResourcePath + "resources2.cfg" );
 
-        Ogre::String dataFolder = mResourcePath + cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE || OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+        Ogre::String rootHlmsFolder = Ogre::macBundlePath() + '/' +
+                                  cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
+#else
+        Ogre::String rootHlmsFolder = mResourcePath + cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
+#endif
 
-        if( dataFolder.empty() )
-            dataFolder = "./";
-        else if( *(dataFolder.end() - 1) != '/' )
-            dataFolder += "/";
+        if( rootHlmsFolder.empty() )
+            rootHlmsFolder = "./";
+        else if( *(rootHlmsFolder.end() - 1) != '/' )
+            rootHlmsFolder += "/";
+
+        //At this point rootHlmsFolder should be a valid path to the Hlms data folder
+
+        Ogre::HlmsUnlit *hlmsUnlit = 0;
+        Ogre::HlmsPbs *hlmsPbs = 0;
+
+        //For retrieval of the paths to the different folders needed
+        Ogre::String mainFolderPath;
+        Ogre::StringVector libraryFoldersPaths;
+        Ogre::StringVector::const_iterator libraryFolderPathIt;
+        Ogre::StringVector::const_iterator libraryFolderPathEn;
+
+        Ogre::ArchiveManager &archiveManager = Ogre::ArchiveManager::getSingleton();
+        
+        {
+            //Create & Register HlmsUnlit
+            //Get the path to all the subdirectories used by HlmsUnlit
+            Ogre::HlmsUnlit::getDefaultPaths( mainFolderPath, libraryFoldersPaths );
+            Ogre::Archive *archiveUnlit = archiveManager.load( rootHlmsFolder + mainFolderPath,
+                                                               "FileSystem", true );
+            Ogre::ArchiveVec archiveUnlitLibraryFolders;
+            libraryFolderPathIt = libraryFoldersPaths.begin();
+            libraryFolderPathEn = libraryFoldersPaths.end();
+            while( libraryFolderPathIt != libraryFolderPathEn )
+            {
+                Ogre::Archive *archiveLibrary =
+                        archiveManager.load( rootHlmsFolder + *libraryFolderPathIt, "FileSystem", true );
+                archiveUnlitLibraryFolders.push_back( archiveLibrary );
+                ++libraryFolderPathIt;
+            }
+
+            //Create and register the unlit Hlms
+            hlmsUnlit = OGRE_NEW Ogre::HlmsUnlit( archiveUnlit, &archiveUnlitLibraryFolders );
+            Ogre::Root::getSingleton().getHlmsManager()->registerHlms( hlmsUnlit );
+        }
+
+        {
+            //Create & Register HlmsPbs
+            //Do the same for HlmsPbs:
+            Ogre::HlmsPbs::getDefaultPaths( mainFolderPath, libraryFoldersPaths );
+            Ogre::Archive *archivePbs = archiveManager.load( rootHlmsFolder + mainFolderPath,
+                                                             "FileSystem", true );
+
+            //Get the library archive(s)
+            Ogre::ArchiveVec archivePbsLibraryFolders;
+            libraryFolderPathIt = libraryFoldersPaths.begin();
+            libraryFolderPathEn = libraryFoldersPaths.end();
+            while( libraryFolderPathIt != libraryFolderPathEn )
+            {
+                Ogre::Archive *archiveLibrary =
+                        archiveManager.load( rootHlmsFolder + *libraryFolderPathIt, "FileSystem", true );
+                archivePbsLibraryFolders.push_back( archiveLibrary );
+                ++libraryFolderPathIt;
+            }
+
+            //Create and register
+            hlmsPbs = OGRE_NEW Ogre::HlmsPbs( archivePbs, &archivePbsLibraryFolders );
+            Ogre::Root::getSingleton().getHlmsManager()->registerHlms( hlmsPbs );
+        }
+
 
         Ogre::RenderSystem *renderSystem = mRoot->getRenderSystem();
-
-        Ogre::String shaderSyntax = "GLSL";
-        if( renderSystem->getName() == "Direct3D11 Rendering Subsystem" )
-            shaderSyntax = "HLSL";
-        else if( renderSystem->getName() == "Metal Rendering Subsystem" )
-            shaderSyntax = "Metal";
-
-        Ogre::Archive *archiveLibrary = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Common/" + shaderSyntax,
-                        "FileSystem", true );
-        Ogre::Archive *archiveLibraryAny = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Common/Any",
-                        "FileSystem", true );
-        Ogre::Archive *archivePbsLibraryAny = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Pbs/Any",
-                        "FileSystem", true );
-        Ogre::Archive *archiveUnlitLibraryAny = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Unlit/Any",
-                        "FileSystem", true );
-
-        Ogre::ArchiveVec library;
-        library.push_back( archiveLibrary );
-        library.push_back( archiveLibraryAny );
-
-        Ogre::Archive *archiveUnlit = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Unlit/" + shaderSyntax,
-                        "FileSystem", true );
-
-        library.push_back( archiveUnlitLibraryAny );
-        Ogre::HlmsUnlit *hlmsUnlit = OGRE_NEW Ogre::HlmsUnlit( archiveUnlit, &library );
-        Ogre::Root::getSingleton().getHlmsManager()->registerHlms( hlmsUnlit );
-        library.pop_back();
-
-        Ogre::Archive *archivePbs = Ogre::ArchiveManager::getSingletonPtr()->load(
-                        dataFolder + "Hlms/Pbs/" + shaderSyntax,
-                        "FileSystem", true );
-        library.push_back( archivePbsLibraryAny );
-        Ogre::HlmsPbs *hlmsPbs = OGRE_NEW Ogre::HlmsPbs( archivePbs, &library );
-        Ogre::Root::getSingleton().getHlmsManager()->registerHlms( hlmsPbs );
-        library.pop_back();
-
         if( renderSystem->getName() == "Direct3D11 Rendering Subsystem" )
         {
             //Set lower limits 512kb instead of the default 4MB per Hlms in D3D 11.0
@@ -504,7 +550,7 @@ namespace Demo
         registerHlms();
 
         // Initialise, parse scripts etc
-        Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+        Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups( true );
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::chooseSceneManager(void)
@@ -529,6 +575,9 @@ namespace Demo
                                                    "ExampleSMInstance" );
 
         mSceneManager->addRenderQueueListener( mOverlaySystem );
+        mSceneManager->getRenderQueue()->setSortRenderQueue(
+                    Ogre::v1::OverlayManager::getSingleton().mDefaultRenderQueueId,
+                    Ogre::RenderQueue::StableSort );
 
         //Set sane defaults for proper shadow mapping
         mSceneManager->setShadowDirectionalLightExtrusionDistance( 500.0f );

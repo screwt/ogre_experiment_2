@@ -44,7 +44,6 @@ if( NOT APPLE )
 endif()
 
 include( CMake/Dependencies/OGRE.cmake )
-
 setupOgre( OGRE_SOURCE, OGRE_BINARIES, OGRE_LIBRARIES )
 
 # Setup our application
@@ -87,3 +86,18 @@ if( APPLE )
 	#set_target_properties( ${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE SampleBrowser_OSX.icns)
 	set( CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework CoreGraphics -framework QuartzCore -framework UIKit -framework Metal -framework MetalKit -framework ModelIO" )
 endif()
+
+if ( WIN32 )
+    file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.vcxproj.user" 
+	"<?xml version=\"1.0\" encoding=\"utf-8\"?>     \
+	<Project ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">
+	<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Debug|x64'\">
+	    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+	    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+	</PropertyGroup>
+	<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\">
+	    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+	    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+	</PropertyGroup>
+	</Project>")
+endif()	
