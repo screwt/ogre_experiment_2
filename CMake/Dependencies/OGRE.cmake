@@ -263,15 +263,15 @@ set( OGRE_LIBRARIES_OUT ${OGRE_LIBRARIES} )
 if( NOT APPLE )
 	set( OGRE_PLUGIN_DIR "Plugins" )
 endif()
+ 
+#message( STATUS "Copying Hlms data files from Ogre repository" )
+#file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Common"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
+#file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Pbs"		DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
+#file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Unlit"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
 
-message( STATUS "Copying Hlms data files from Ogre repository" )
-file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Common"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
-file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Pbs"		DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
-file( COPY "${OGRE_SOURCE}/Samples/Media/Hlms/Unlit"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Hlms" )
-
-message( STATUS "Copying Common data files from Ogre repository" )
-file( COPY "${OGRE_SOURCE}/Samples/Media/2.0/scripts/materials/Common"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Materials" )
-file( COPY "${OGRE_SOURCE}/Samples/Media/packs/DebugPack.zip"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data" )
+#message( STATUS "Copying Common data files from Ogre repository" )
+#file( COPY "${OGRE_SOURCE}/Samples/Media/2.0/scripts/materials/Common"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data/Materials" )
+#file( COPY "${OGRE_SOURCE}/Samples/Media/packs/DebugPack.zip"	DESTINATION "${CMAKE_SOURCE_DIR}/bin/Data" )
 
 message( STATUS "Copying DLLs and generating Plugins.cfg for Debug" )
 setupPluginFileFromTemplate( "Debug" )
