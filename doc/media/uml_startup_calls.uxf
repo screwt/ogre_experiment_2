@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>7</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>35</x>
-      <y>266</y>
-      <w>224</w>
-      <h>91</h>
+      <x>16</x>
+      <y>112</y>
+      <w>256</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>EmptyProject.cpp
 --
@@ -24,10 +24,10 @@ createSystems() definition
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>287</x>
-      <y>273</y>
-      <w>217</w>
-      <h>189</h>
+      <x>304</x>
+      <y>120</y>
+      <w>248</w>
+      <h>216</h>
     </coordinates>
     <panel_attributes>MainLoopSingleThreaded.cpp
 --
@@ -53,10 +53,10 @@ mainAppSingleThreaded() definition
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>308</y>
-      <w>49</w>
-      <h>21</h>
+      <x>264</x>
+      <y>160</y>
+      <w>56</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
@@ -64,10 +64,10 @@ mainAppSingleThreaded() definition
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>287</y>
-      <w>49</w>
-      <h>28</h>
+      <x>264</x>
+      <y>136</y>
+      <w>56</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;20.0</additional_attributes>
@@ -75,10 +75,10 @@ mainAppSingleThreaded() definition
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>532</x>
-      <y>329</y>
-      <w>224</w>
-      <h>91</h>
+      <x>40</x>
+      <y>384</y>
+      <w>256</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>EmptyProjectGameState.cpp
 --
@@ -93,21 +93,21 @@ createScene01() definition
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>343</y>
-      <w>49</w>
-      <h>21</h>
+      <x>0</x>
+      <y>200</y>
+      <w>592</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>50.0;260.0;10.0;260.0;10.0;190.0;720.0;190.0;720.0;10.0;690.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>784</x>
-      <y>357</y>
-      <w>224</w>
-      <h>91</h>
+      <x>320</x>
+      <y>416</y>
+      <w>256</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>DotSceneLoader.cpp
 --
@@ -119,12 +119,12 @@ parseDotScene() definition
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>371</y>
-      <w>49</w>
-      <h>21</h>
+      <x>288</x>
+      <y>432</y>
+      <w>48</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
