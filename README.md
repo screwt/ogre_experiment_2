@@ -26,3 +26,5 @@ Don t forget the the tow links inlude & lib
 
 https://ogrecave.github.io/ogre/api/2.1/UsingOgreInYourApp.html
 
+## Startup calls graph
+![call graph](https://raw.githubusercontent.com/screwt/ogre_experiment_2/develop/doc/media/uml_startup_calls.png)
