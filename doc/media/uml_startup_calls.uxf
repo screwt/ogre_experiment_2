@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>35</x>
+      <y>266</y>
+      <w>224</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>EmptyProject.cpp
+--
+main/entrypoint definition
+--
+    call mainAppSingleThreaded()
+--
+createSystems() definition
+--
+  Create EmptyProjectGameState
+  Create EmptyProjectGraphicsSystem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>287</x>
+      <y>273</y>
+      <w>217</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>MainLoopSingleThreaded.cpp
+--
+mainAppSingleThreaded() definition
+--
+   call createSystems
+--
+   call graphicsSystem-&gt;initialize()
+   call logicSystem-&gt;initialize()
+--
+   call graphicsSystem-&gt;createScene01()
+--
+   call logicSystem-&gt;createScene01()
+   call graphicsSystem-&gt;createScene02()
+   call logicSystem-&gt;createScene02()
+
+   While !graphicsSystem-&gt;getQuit()
+      render calls...
+
+   call destroyEverything</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>308</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>287</y>
+      <w>49</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>532</x>
+      <y>329</y>
+      <w>224</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>EmptyProjectGameState.cpp
+--
+createScene01() definition
+--
+  create CameraController()
+--
+  call DotSceneLoader.parseDotScene()
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>497</x>
+      <y>343</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>357</y>
+      <w>224</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>DotSceneLoader.cpp
+--
+parseDotScene() definition
+--
+  load sceneNodes from .scene file</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>749</x>
+      <y>371</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
