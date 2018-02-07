@@ -165,7 +165,7 @@ initialize() definition
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>210</x>
+      <x>200</x>
       <y>210</y>
       <w>180</w>
       <h>50</h>
