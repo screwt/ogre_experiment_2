@@ -583,6 +583,8 @@ namespace Demo
         mSceneManager->setShadowDirectionalLightExtrusionDistance( 500.0f );
         mSceneManager->setShadowFarDistance( 500.0f );
     }
+
+	void GraphicsSystem::setupAfterSceneLoaded(void) {}
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::createCamera(void)
     {
@@ -595,10 +597,15 @@ namespace Demo
         mCamera->setNearClipDistance( 0.2f );
         mCamera->setFarClipDistance( 1000.0f );
         mCamera->setAutoAspectRatio( true );
+
+		//mCamera->detachFromParent();
+		
+	
     }
     //-----------------------------------------------------------------------------------
-    Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)
+	Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)
     {
+		
         Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
 
         const Ogre::String workspaceName( "Demo Workspace" );
@@ -609,7 +616,7 @@ namespace Demo
         }
 
         return compositorManager->addWorkspace( mSceneManager, mRenderWindow, mCamera,
-                                                workspaceName, true );
+                                                workspaceName, false );
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::stopCompositor(void)

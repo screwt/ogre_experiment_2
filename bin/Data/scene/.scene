@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- exporter: blender2ogre 0.7.0 -->
-<!-- export_time: Fri, 02 Feb 2018 21:30:28 +0000 -->
-<!-- previous_export_time: Fri, 02 Feb 2018 19:40:00 +0000 -->
+<!-- export_time: Fri, 02 Feb 2018 19:26:02 +0000 -->
+<!-- previous_export_time: Fri, 02 Feb 2018 19:25:27 +0000 -->
 <scene author="ben" formatVersion="1.1" >
   <nodes >
     <node name="Sphere" >
@@ -95,7 +95,7 @@
       <position x="-3.704621" y="5.903862" z="1.072649" />
       <rotation qw="0.570947" qx="0.169076" qy="0.755880" qz="-0.272171" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <light name="Lamp" powerScale="1.7599999904632568" type="point" >
+      <light name="Lamp" powerScale="1.0" type="point" >
         <position x="-3.704621" y="5.903862" z="1.072649" />
         <colourDiffuse b="1.0" g="0.5217265486717224" r="0.5534569025039673" />
         <colourSpecular b="1.0" g="0.5217265486717224" r="0.5534569025039673" />

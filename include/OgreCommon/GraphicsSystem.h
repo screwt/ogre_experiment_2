@@ -84,15 +84,16 @@ namespace Demo
         void gameEntityAdded( const GameEntityManager::CreatedGameEntity *createdGameEntity );
         void gameEntityRemoved( GameEntity *toRemove );
     public:
+		//-- background color is handled by \bin\Data\scripts\Compositors\EmptyProject.compositor
         GraphicsSystem( GameState *gameState,
-                        Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.2f, 0.4f, 0.6f ) );
+                        Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.0f, 0.0f, 0.0f ) );
         virtual ~GraphicsSystem();
 
         void _notifyLogicSystem( BaseSystem *logicSystem )      { mLogicSystem = logicSystem; }
 
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
-
+		void setupAfterSceneLoaded(void);
         void update( float timeSinceLast );
 
         /** Updates the SceneNodes of all the game entities in the container,

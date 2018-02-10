@@ -33,7 +33,7 @@ void DotSceneLoader::parseDotScene(const Ogre::String &SceneName, const Ogre::St
     m_sPrependNode = sPrependNode;
     staticObjects.clear();
     dynamicObjects.clear();
- 
+	camerasNodes.clear();
     rapidxml::xml_document<> XMLDoc;    // character type defaults to char
  
     rapidxml::xml_node<>* XMLRoot;
@@ -392,13 +392,14 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
  
     // Create the camera
     Ogre::Camera *pCamera = mSceneMgr->createCamera(name);
-	pCamera->getParentSceneNode()->detachObject(pCamera);
-	pParent->attachObject(pCamera);
+	
 
-    //TODO: make a flag or attribute indicating whether or not the camera should be attached to any parent node.
-    //if(pParent)
-    //    pParent->attachObject(pCamera);
- 
+	if (pParent) {
+		pCamera->getParentSceneNode()->detachObject(pCamera);
+		pParent->attachObject(pCamera);
+		pParent->setName("CAMERA_NODE");
+		camerasNodes.push_back(pParent);
+	}
     // Set the field-of-view
     //! @todo Is this always in degrees?
     //pCamera->setFOVy(Ogre::Degree(fov));

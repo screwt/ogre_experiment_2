@@ -69,6 +69,10 @@ namespace Demo
             }
         }
     }
+
+	void CameraController::switchCamera() {
+		//mGraphicsSystem->
+	}
     //-----------------------------------------------------------------------------------
     bool CameraController::keyPressed( const SDL_KeyboardEvent &arg )
     {
@@ -87,6 +91,8 @@ namespace Demo
             mSlideUpDown[0] = true;
         else if( arg.keysym.sym == SDLK_PAGEDOWN )
             mSlideUpDown[1] = true;
+		else if (arg.keysym.sym == SDLK_c)
+			switchCamera();
         else
             return false;
 

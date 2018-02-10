@@ -44,14 +44,23 @@ namespace Demo
     {
         mCameraController = new CameraController( mGraphicsSystem, true );
 
-	Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
+		Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
 
-	DotSceneLoader loader;
-	loader.parseDotScene("test.scene","General", sceneManager);
-
-
-        TutorialGameState::createScene01();
+		DotSceneLoader loader;
+		loader.parseDotScene("test.scene","General", sceneManager);
+		TutorialGameState::createScene01();
     }
+	void GraphicsSystem::setupAfterSceneLoaded(void) {
+		Ogre::MapIterator<Ogre::Camera*>::iterator camNodesIterator;
+		camNodesIterator = mSceneManager->getCameraIterator();
+		Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
+		std::vector<Ogre::SceneNode*>::iterator camNodesIterator;
+		for (camNodesIterator = camNodesIterator.begin(); camNodesIterator != camNodesIterator.end(); camNodesIterator++) {
+			//compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
+			//	"EmptyProjectWorkspace", true);
+		}
+	}
+
     //-----------------------------------------------------------------------------------
 	void EmptyProjectGameState::update( float timeSinceLast )
 	{

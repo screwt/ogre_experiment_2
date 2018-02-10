@@ -86,6 +86,9 @@ int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
         if( logicSystem )
             logicSystem->createScene02();
 
+
+		graphicsSystem->
+
     #if OGRE_USE_SDL2
         //Do this after creating the scene for easier the debugging (the mouse doesn't hide itself)
         SdlInputHandler *inputHandler = graphicsSystem->getInputHandler();
