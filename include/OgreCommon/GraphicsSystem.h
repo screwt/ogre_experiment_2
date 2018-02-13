@@ -94,6 +94,7 @@ namespace Demo
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
 		void setupAfterSceneLoaded(void);
+		void switchWorkSpace(void);
         void update( float timeSinceLast );
 
         /** Updates the SceneNodes of all the game entities in the container,

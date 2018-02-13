@@ -27,7 +27,7 @@
 #include "OgreHlmsManager.h"
 #include "OgreHlmsTextureManager.h"
 #include "OgreHlmsPbs.h"
-
+#include "OgreLogManager.h"
 #include "Compositor/OgreCompositorShadowNode.h"
 
 using namespace Demo;
@@ -50,16 +50,7 @@ namespace Demo
 		loader.parseDotScene("test.scene","General", sceneManager);
 		TutorialGameState::createScene01();
     }
-	void GraphicsSystem::setupAfterSceneLoaded(void) {
-		Ogre::MapIterator<Ogre::Camera*>::iterator camNodesIterator;
-		camNodesIterator = mSceneManager->getCameraIterator();
-		Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
-		std::vector<Ogre::SceneNode*>::iterator camNodesIterator;
-		for (camNodesIterator = camNodesIterator.begin(); camNodesIterator != camNodesIterator.end(); camNodesIterator++) {
-			//compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
-			//	"EmptyProjectWorkspace", true);
-		}
-	}
+	
 
     //-----------------------------------------------------------------------------------
 	void EmptyProjectGameState::update( float timeSinceLast )
@@ -71,10 +62,24 @@ namespace Demo
 	{
 		TutorialGameState::generateDebugText( timeSinceLast, outText );
 	}
+
+	void EmptyProjectGameState::switchWorkspace() {
+		Ogre::LogManager::getSingleton().logMessage("switchWorkspace");
+		mGraphicsSystem->getRoot()->getCompositorManager2();
+		mGraphicsSystem->switchWorkSpace();
+		//mGraphicsSystem ->getSceneManager()->get
+		//Ogre::SceneManager::CameraIterator camNodesIterator = mSceneManager->getCameraIterator();
+
+	}
+
     //-----------------------------------------------------------------------------------
 	void EmptyProjectGameState::keyReleased( const SDL_KeyboardEvent &arg )
     {
-        if( (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS)) != 0 )
+		if (arg.keysym.sym == SDLK_c) {
+			EmptyProjectGameState::switchWorkspace();
+			
+		}
+		else if ((arg.keysym.mod & ~(KMOD_NUM | KMOD_CAPS)) != 0)
         {
             TutorialGameState::keyReleased( arg );
             return;

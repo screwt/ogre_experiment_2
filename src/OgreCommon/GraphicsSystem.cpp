@@ -585,6 +585,7 @@ namespace Demo
     }
 
 	void GraphicsSystem::setupAfterSceneLoaded(void) {}
+	void GraphicsSystem::switchWorkSpace(void) {};
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::createCamera(void)
     {
