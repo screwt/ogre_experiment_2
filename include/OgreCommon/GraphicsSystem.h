@@ -12,7 +12,7 @@
 #include "Threading/OgreUniformScalableTask.h"
 #include "SdlEmulationLayer.h"
 #include "OgreOverlaySystem.h"
-
+#include "Compositor/OgreCompositorWorkspace.h"
 #if OGRE_USE_SDL2
     #include <SDL.h>
 #endif
@@ -35,6 +35,7 @@ namespace Demo
         Ogre::RenderWindow          *mRenderWindow;
         Ogre::SceneManager          *mSceneManager;
         Ogre::Camera                *mCamera;
+		Ogre::Camera                *mCamera2;
         Ogre::CompositorWorkspace   *mWorkspace;
         Ogre::String                mPluginsPath;
         Ogre::String                mWriteAccessFolder;
@@ -83,6 +84,9 @@ namespace Demo
 
         void gameEntityAdded( const GameEntityManager::CreatedGameEntity *createdGameEntity );
         void gameEntityRemoved( GameEntity *toRemove );
+		std::vector<Ogre::CompositorWorkspace*> mCompositorWorkspaces;
+		std::vector<Ogre::CompositorWorkspace*>::iterator mActiveWorkspace;
+		
     public:
 		//-- background color is handled by \bin\Data\scripts\Compositors\EmptyProject.compositor
         GraphicsSystem( GameState *gameState,

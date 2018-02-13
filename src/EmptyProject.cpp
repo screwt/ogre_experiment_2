@@ -46,37 +46,12 @@ namespace Demo
 		  // see ../Data/scripts/Compositors/EmptyProject.compositor permit shadow casting
 		  Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
 		  Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
-			  "EmptyProjectWorkspace", true);
+			  "EmptyProjectWorkspace", false);
 		  mCompositorWorkspaces.push_back(cw);
 		  return cw;
 
         }
 
-		void EmptyProjectGraphicsSystem::setupAfterSceneLoaded(void) {
-			Ogre::SceneManager::CameraIterator camNodesIterator = mSceneManager->getCameraIterator();
-			Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
-			
-			while (camNodesIterator.hasMoreElements()) {
-				Ogre::LogManager::getSingleton().logMessage("-- loaded cam");
-				Ogre::LogManager::getSingleton().logMessage("Loaded CAMERA");
-				Ogre::Camera* cam = camNodesIterator.getNext();
-				Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(mSceneManager, mRenderWindow, cam,
-					"EmptyProjectWorkspace", true);
-				mCompositorWorkspaces.push_back(cw);
-			}
-			mActiveWorkspace = mCompositorWorkspaces.begin();
-			Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
-			ws->setEnabled(true);
-		}
-
-		void EmptyProjectGraphicsSystem::switchWorkSpace() {
-			Ogre::LogManager::getSingleton().logMessage("-- switchWorkspace");
-			Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
-			ws->setEnabled(false);
-			++mActiveWorkspace;
-			ws = *mActiveWorkspace;
-			ws->setEnabled(true);
-		}
 
         virtual void setupResources(void)
         {
@@ -188,8 +163,7 @@ namespace Demo
             }
 #endif
         }
-		std::vector<Ogre::CompositorWorkspace*> mCompositorWorkspaces;
-		std::vector<Ogre::CompositorWorkspace*>::iterator mActiveWorkspace;
+		
     };
 
     void MainEntryPoints::createSystems( GameState **outGraphicsGameState,

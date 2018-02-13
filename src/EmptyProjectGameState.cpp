@@ -46,8 +46,8 @@ namespace Demo
 
 		Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
 
-		DotSceneLoader loader;
-		loader.parseDotScene("test.scene","General", sceneManager);
+		//mLoader = new DotSceneLoader();
+		//mLoader->parseDotScene("test.scene", "General", sceneManager);
 		TutorialGameState::createScene01();
     }
 	

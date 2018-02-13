@@ -4,7 +4,7 @@
 
 #include "OgrePrerequisites.h"
 #include "TutorialGameState.h"
-
+#include "DotSceneLoader.h"
 namespace Demo
 {
   struct GameEntity;
@@ -17,6 +17,8 @@ namespace Demo
 	
 		Ogre::Root      *mRoot;
 		Ogre::SceneNode *mSceneNode;	
+		DotSceneLoader *mLoader;
+
 		public:
 		EmptyProjectGameState( const Ogre::String &helpDescription );
 
