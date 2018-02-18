@@ -584,37 +584,12 @@ namespace Demo
         mSceneManager->setShadowFarDistance( 500.0f );
     }
 
-	void GraphicsSystem::setupAfterSceneLoaded(void) {
-		Ogre::SceneManager::CameraIterator camNodesIterator = mSceneManager->getCameraIterator();
-		Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
-		
-		//Ogre::SceneManager::CameraList cml = mSceneManager->getCameras();
-		 
-		while (camNodesIterator.hasMoreElements()) {
-			Ogre::LogManager::getSingleton().logMessage("-- loaded cam");
-			Ogre::Camera* cam = camNodesIterator.getNext();
-			Ogre::LogManager::getSingleton().logMessage("Loaded CAMERA "+ cam->getName());
-			Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(mSceneManager, mRenderWindow, cam,
-				"EmptyProjectWorkspace", false);
-			mCompositorWorkspaces.push_back(cw);
-		}
-		mActiveWorkspace = mCompositorWorkspaces.begin();
-		Ogre::LogManager::getSingleton().logMessage("-- set ws");
-		Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
-		Ogre::LogManager::getSingleton().logMessage("-- set ws done");
-		ws->setEnabled(true);
-	}
-	void GraphicsSystem::switchWorkSpace(void) {
-		Ogre::LogManager::getSingleton().logMessage("-- switchWorkspace");
-		Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
-		ws->setEnabled(false);
-		mActiveWorkspace++;
-		ws = *mActiveWorkspace;
-		ws->setEnabled(true);
-	};
+	
+	
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::createCamera(void)
     {
+		
         mCamera = mSceneManager->createCamera( "Main Camera" );
 
         // Position it at 500 in Z direction
@@ -625,7 +600,8 @@ namespace Demo
         mCamera->setFarClipDistance( 1000.0f );
         mCamera->setAutoAspectRatio( true );
 
-		mCamera2 = mSceneManager->createCamera("Main Camera 2");
+		//mCamera2 = mSceneManager->createCamera("Main Camera 2");
+		
     }
     //-----------------------------------------------------------------------------------
 	Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)

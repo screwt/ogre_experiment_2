@@ -47,7 +47,7 @@ namespace Demo
 		  Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
 		  Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
 			  "EmptyProjectWorkspace", false);
-		  mCompositorWorkspaces.push_back(cw);
+		  //mCompositorWorkspaces.push_back(cw);
 		  return cw;
 
         }

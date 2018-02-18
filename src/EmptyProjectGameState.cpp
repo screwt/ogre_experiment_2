@@ -30,6 +30,9 @@
 #include "OgreLogManager.h"
 #include "Compositor/OgreCompositorShadowNode.h"
 
+#include "Compositor/OgreCompositorManager2.h"
+#include "Compositor/OgreCompositorWorkspace.h"
+
 using namespace Demo;
 
 namespace Demo
@@ -46,8 +49,8 @@ namespace Demo
 
 		Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
 
-		//mLoader = new DotSceneLoader();
-		//mLoader->parseDotScene("test.scene", "General", sceneManager);
+		mLoader = new DotSceneLoader();
+		mLoader->parseDotScene("test.scene", "General", sceneManager);
 		TutorialGameState::createScene01();
     }
 	
@@ -63,13 +66,52 @@ namespace Demo
 		TutorialGameState::generateDebugText( timeSinceLast, outText );
 	}
 
+	void EmptyProjectGameState::setupAfterSceneLoaded(void) {
+		Ogre::LogManager::getSingleton().logMessage("-- setupAfterSceneLoaded");
+		//Ogre::SceneManager::CameraIterator camNodesIterator = mGraphicsSystem->getSceneManager()->getCameraIterator();
+		Ogre::CompositorManager2 *compositorManager = mGraphicsSystem->getRoot()->getCompositorManager2();
+		mCompositorWorkspaces.push_back(mGraphicsSystem->getCompositorWorkspace());
+		//Ogre::SceneManager::CameraList cml = mSceneManager->getCameras();
+
+		for (std::vector<Ogre::Camera*>::iterator camerasNodesIt = mLoader->camerasNodes.begin();
+			camerasNodesIt != mLoader->camerasNodes.end(); camerasNodesIt++) {
+			Ogre::Camera* cam = *camerasNodesIt;
+			Ogre::LogManager::getSingleton().logMessage("-- loaded cam");
+			Ogre::LogManager::getSingleton().logMessage("Loaded CAMERA " + cam->getName());
+			Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(
+				mGraphicsSystem->getSceneManager(),
+				mGraphicsSystem->getRenderWindow(),
+				cam,
+				"EmptyProjectWorkspace", false);
+			mCompositorWorkspaces.push_back(cw);
+			
+		}
+
+		
+		mActiveWorkspace = mCompositorWorkspaces.begin();
+		Ogre::LogManager::getSingleton().logMessage("-- set ws");
+		Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
+		Ogre::LogManager::getSingleton().logMessage("-- set ws done");
+		ws->setEnabled(true);
+	}
+
 	void EmptyProjectGameState::switchWorkspace() {
+		
 		Ogre::LogManager::getSingleton().logMessage("switchWorkspace");
-		mGraphicsSystem->getRoot()->getCompositorManager2();
-		mGraphicsSystem->switchWorkSpace();
+		Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
+		ws->setEnabled(false);
+		mActiveWorkspace++;
+		if (mActiveWorkspace == mCompositorWorkspaces.end())
+			mActiveWorkspace = mCompositorWorkspaces.begin();
+		
+		
+		ws = *mActiveWorkspace;
+		ws->setEnabled(true);
+		//mGraphicsSystem->getRoot()->getCompositorManager2();
+		//mGraphicsSystem->switchWorkSpace();
 		//mGraphicsSystem ->getSceneManager()->get
 		//Ogre::SceneManager::CameraIterator camNodesIterator = mSceneManager->getCameraIterator();
-
+		//switchWorkSpace();
 	}
 
     //-----------------------------------------------------------------------------------

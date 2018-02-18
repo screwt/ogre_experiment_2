@@ -18,10 +18,12 @@ namespace Demo
 		Ogre::Root      *mRoot;
 		Ogre::SceneNode *mSceneNode;	
 		DotSceneLoader *mLoader;
+		std::vector<Ogre::CompositorWorkspace*> mCompositorWorkspaces;
+		std::vector<Ogre::CompositorWorkspace*>::iterator mActiveWorkspace;
 
 		public:
 		EmptyProjectGameState( const Ogre::String &helpDescription );
-
+		void setupAfterSceneLoaded(void);
         virtual void createScene01(void);
 
         virtual void update( float timeSinceLast );

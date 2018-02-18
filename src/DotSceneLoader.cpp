@@ -394,12 +394,11 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
     // Create the camera
     Ogre::Camera *pCamera = mSceneMgr->createCamera(name);
 	
-
+	camerasNodes.push_back(pCamera);
 	if (pParent) {
 		pCamera->getParentSceneNode()->detachObject(pCamera);
 		pParent->attachObject(pCamera);
 		pParent->setName("CAMERA_NODE");
-		camerasNodes.push_back(pParent);
 	}
     // Set the field-of-view
     //! @todo Is this always in degrees?
@@ -466,6 +465,10 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
         pNode->setOrientation(pCamera->getOrientation());
         pNode->scale(1,1,1);
     }
+	//pCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	//pCamera->setNearClipDistance(0.2f);
+	//pCamera->setFarClipDistance(1000.0f);
+	//pCamera->setAutoAspectRatio(true);
 }
  
 void DotSceneLoader::processNode(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)

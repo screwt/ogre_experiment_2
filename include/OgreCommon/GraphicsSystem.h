@@ -84,8 +84,8 @@ namespace Demo
 
         void gameEntityAdded( const GameEntityManager::CreatedGameEntity *createdGameEntity );
         void gameEntityRemoved( GameEntity *toRemove );
-		std::vector<Ogre::CompositorWorkspace*> mCompositorWorkspaces;
-		std::vector<Ogre::CompositorWorkspace*>::iterator mActiveWorkspace;
+		std::vector<Ogre::Node*> mCamNodes;
+
 		
     public:
 		//-- background color is handled by \bin\Data\scripts\Compositors\EmptyProject.compositor
@@ -97,7 +97,7 @@ namespace Demo
 
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
-		void setupAfterSceneLoaded(void);
+		
 		void switchWorkSpace(void);
         void update( float timeSinceLast );
 

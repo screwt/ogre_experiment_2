@@ -51,7 +51,7 @@
         std::vector<nodeProperty> nodeProperties;
         std::vector<Ogre::String> staticObjects;
         std::vector<Ogre::String> dynamicObjects;
-		std::vector<Ogre::SceneNode*> camerasNodes;
+		std::vector<Ogre::Camera*> camerasNodes;
  
     protected:
         void processScene(rapidxml::xml_node<>* XMLRoot);
