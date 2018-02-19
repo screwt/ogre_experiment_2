@@ -398,7 +398,6 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
 	if (pParent) {
 		pCamera->getParentSceneNode()->detachObject(pCamera);
 		pParent->attachObject(pCamera);
-		pParent->setName("CAMERA_NODE");
 	}
     // Set the field-of-view
     //! @todo Is this always in degrees?
@@ -433,8 +432,13 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
  
     // Process rotation (?)
     pElement = XMLNode->first_node("rotation");
-    if(pElement)
-        pCamera->setOrientation(parseQuaternion(pElement));
+    if(pElement){
+      Ogre::Quaternion q = parseQuaternion(pElement);
+      std::ostringstream ostr;
+      ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
+      Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
+      pCamera->setOrientation(q);
+    }
  
     // Process normal (?)
     pElement = XMLNode->first_node("normal");
@@ -459,16 +463,28 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
     // construct a scenenode is no parent
     if(!pParent)
     {
+      Ogre::LogManager::getSingleton().logMessage("CAM - NO Parent "+name);
         Ogre::SceneNode* pNode = mAttachNode->createChildSceneNode();
 	pNode->setName(name);
         pNode->setPosition(pCamera->getPosition());
         pNode->setOrientation(pCamera->getOrientation());
         pNode->scale(1,1,1);
+    }else{
+      Ogre::LogManager::getSingleton().logMessage("CAM - Parent "+name);
+
+      Ogre::Quaternion q = pParent->getOrientation();
+      std::ostringstream ostr;
+      ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
+      Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
+
+      pCamera->setOrientation(pParent->getOrientation());
+      pParent->setOrientation(1,0,0,0);
     }
 	//pCamera->lookAt(Ogre::Vector3(0, 0, 0));
 	//pCamera->setNearClipDistance(0.2f);
 	//pCamera->setFarClipDistance(1000.0f);
-	//pCamera->setAutoAspectRatio(true);
+    pCamera->setAutoAspectRatio(true);
+    
 }
  
 void DotSceneLoader::processNode(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)

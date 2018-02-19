@@ -593,7 +593,7 @@ namespace Demo
         mCamera = mSceneManager->createCamera( "Main Camera" );
 
         // Position it at 500 in Z direction
-        mCamera->setPosition( Ogre::Vector3( 0, 5, 15 ) );
+        mCamera->setPosition( Ogre::Vector3( 10, 5, 15 ) );
         // Look back along -Z
         mCamera->lookAt( Ogre::Vector3( 0, 0, 0 ) );
         mCamera->setNearClipDistance( 0.2f );
@@ -603,6 +603,11 @@ namespace Demo
 		//mCamera2 = mSceneManager->createCamera("Main Camera 2");
 		
     }
+
+    void GraphicsSystem::setCamera(Ogre::Camera* cam){
+      mCamera = cam;
+    }
+
     //-----------------------------------------------------------------------------------
 	Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)
     {

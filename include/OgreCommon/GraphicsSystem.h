@@ -35,7 +35,6 @@ namespace Demo
         Ogre::RenderWindow          *mRenderWindow;
         Ogre::SceneManager          *mSceneManager;
         Ogre::Camera                *mCamera;
-		Ogre::Camera                *mCamera2;
         Ogre::CompositorWorkspace   *mWorkspace;
         Ogre::String                mPluginsPath;
         Ogre::String                mWriteAccessFolder;
@@ -98,8 +97,10 @@ namespace Demo
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
 		
-		void switchWorkSpace(void);
+        void switchWorkSpace(void);
         void update( float timeSinceLast );
+
+        void setCamera(Ogre::Camera* cam);
 
         /** Updates the SceneNodes of all the game entities in the container,
             interpolating them according to weight, reading the transforms from
