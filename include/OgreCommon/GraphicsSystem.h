@@ -12,7 +12,7 @@
 #include "Threading/OgreUniformScalableTask.h"
 #include "SdlEmulationLayer.h"
 #include "OgreOverlaySystem.h"
-
+#include "Compositor/OgreCompositorWorkspace.h"
 #if OGRE_USE_SDL2
     #include <SDL.h>
 #endif
@@ -83,17 +83,24 @@ namespace Demo
 
         void gameEntityAdded( const GameEntityManager::CreatedGameEntity *createdGameEntity );
         void gameEntityRemoved( GameEntity *toRemove );
+		std::vector<Ogre::Node*> mCamNodes;
+
+		
     public:
+		//-- background color is handled by \bin\Data\scripts\Compositors\EmptyProject.compositor
         GraphicsSystem( GameState *gameState,
-                        Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.2f, 0.4f, 0.6f ) );
+                        Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.0f, 0.0f, 0.0f ) );
         virtual ~GraphicsSystem();
 
         void _notifyLogicSystem( BaseSystem *logicSystem )      { mLogicSystem = logicSystem; }
 
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
-
+		
+        void switchWorkSpace(void);
         void update( float timeSinceLast );
+
+        void setCamera(Ogre::Camera* cam);
 
         /** Updates the SceneNodes of all the game entities in the container,
             interpolating them according to weight, reading the transforms from

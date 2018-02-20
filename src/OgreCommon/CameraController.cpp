@@ -5,6 +5,7 @@
 
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
+#include "OgreLogManager.h"
 
 using namespace Demo;
 
@@ -22,6 +23,9 @@ namespace Demo
         memset( mWASD, 0, sizeof(mWASD) );
         memset( mSlideUpDown, 0, sizeof(mSlideUpDown) );
     }
+
+  
+
     //-----------------------------------------------------------------------------------
     void CameraController::update( float timeSinceLast )
     {
@@ -69,6 +73,7 @@ namespace Demo
             }
         }
     }
+
     //-----------------------------------------------------------------------------------
     bool CameraController::keyPressed( const SDL_KeyboardEvent &arg )
     {
@@ -77,9 +82,11 @@ namespace Demo
 
         if( arg.keysym.sym == SDLK_w )
             mWASD[0] = true;
-        else if( arg.keysym.sym == SDLK_a )
+        else if( arg.keysym.sym == SDLK_a ){
+          Ogre::Camera *camera = mGraphicsSystem->getCamera();
+          Ogre::LogManager::getSingleton().logMessage("camCtrl ketPressed a"+camera->getName());
             mWASD[1] = true;
-        else if( arg.keysym.sym == SDLK_s )
+        }else if( arg.keysym.sym == SDLK_s )
             mWASD[2] = true;
         else if( arg.keysym.sym == SDLK_d )
             mWASD[3] = true;
@@ -95,12 +102,14 @@ namespace Demo
     //-----------------------------------------------------------------------------------
     bool CameraController::keyReleased( const SDL_KeyboardEvent &arg )
     {
+
         if( arg.keysym.sym == SDLK_LSHIFT )
             mSpeedMofifier = false;
 
         if( arg.keysym.sym == SDLK_w )
             mWASD[0] = false;
         else if( arg.keysym.sym == SDLK_a )
+          
             mWASD[1] = false;
         else if( arg.keysym.sym == SDLK_s )
             mWASD[2] = false;

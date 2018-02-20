@@ -5,7 +5,7 @@
     #include "SdlInputHandler.h"
 #endif
 #include "GameEntity.h"
-
+#include "DotSceneLoader.h"
 #include "OgreRoot.h"
 #include "OgreException.h"
 #include "OgreConfigFile.h"
@@ -20,7 +20,7 @@
 #include "OgreArchiveManager.h"
 
 #include "Compositor/OgreCompositorManager2.h"
-
+#include "Compositor/OgreCompositorWorkspace.h"
 #include "OgreOverlaySystem.h"
 #include "OgreOverlayManager.h"
 
@@ -583,22 +583,35 @@ namespace Demo
         mSceneManager->setShadowDirectionalLightExtrusionDistance( 500.0f );
         mSceneManager->setShadowFarDistance( 500.0f );
     }
+
+	
+	
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::createCamera(void)
     {
+		
         mCamera = mSceneManager->createCamera( "Main Camera" );
 
         // Position it at 500 in Z direction
-        mCamera->setPosition( Ogre::Vector3( 0, 5, 15 ) );
+        mCamera->setPosition( Ogre::Vector3( 10, 5, 15 ) );
         // Look back along -Z
         mCamera->lookAt( Ogre::Vector3( 0, 0, 0 ) );
         mCamera->setNearClipDistance( 0.2f );
         mCamera->setFarClipDistance( 1000.0f );
         mCamera->setAutoAspectRatio( true );
+
+		//mCamera2 = mSceneManager->createCamera("Main Camera 2");
+		
     }
+
+    void GraphicsSystem::setCamera(Ogre::Camera* cam){
+      mCamera = cam;
+    }
+
     //-----------------------------------------------------------------------------------
-    Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)
+	Ogre::CompositorWorkspace* GraphicsSystem::setupCompositor(void)
     {
+		
         Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
 
         const Ogre::String workspaceName( "Demo Workspace" );
@@ -609,7 +622,7 @@ namespace Demo
         }
 
         return compositorManager->addWorkspace( mSceneManager, mRenderWindow, mCamera,
-                                                workspaceName, true );
+                                                workspaceName, false );
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::stopCompositor(void)

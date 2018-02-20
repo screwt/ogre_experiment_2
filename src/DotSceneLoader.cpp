@@ -33,7 +33,7 @@ void DotSceneLoader::parseDotScene(const Ogre::String &SceneName, const Ogre::St
     m_sPrependNode = sPrependNode;
     staticObjects.clear();
     dynamicObjects.clear();
- 
+	camerasNodes.clear();
     rapidxml::xml_document<> XMLDoc;    // character type defaults to char
  
     rapidxml::xml_node<>* XMLRoot;
@@ -383,6 +383,7 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
  
 void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)
 {
+	
     // Process attributes
     Ogre::String name = getAttrib(XMLNode, "name");
     Ogre::String id = getAttrib(XMLNode, "id");
@@ -392,13 +393,12 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
  
     // Create the camera
     Ogre::Camera *pCamera = mSceneMgr->createCamera(name);
-	pCamera->getParentSceneNode()->detachObject(pCamera);
-	pParent->attachObject(pCamera);
-
-    //TODO: make a flag or attribute indicating whether or not the camera should be attached to any parent node.
-    //if(pParent)
-    //    pParent->attachObject(pCamera);
- 
+	
+	camerasNodes.push_back(pCamera);
+	if (pParent) {
+		pCamera->getParentSceneNode()->detachObject(pCamera);
+		pParent->attachObject(pCamera);
+	}
     // Set the field-of-view
     //! @todo Is this always in degrees?
     //pCamera->setFOVy(Ogre::Degree(fov));
@@ -432,8 +432,13 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
  
     // Process rotation (?)
     pElement = XMLNode->first_node("rotation");
-    if(pElement)
-        pCamera->setOrientation(parseQuaternion(pElement));
+    if(pElement){
+      Ogre::Quaternion q = parseQuaternion(pElement);
+      std::ostringstream ostr;
+      ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
+      Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
+      //pCamera->setOrientation(q);
+    }
  
     // Process normal (?)
     pElement = XMLNode->first_node("normal");
@@ -458,12 +463,33 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
     // construct a scenenode is no parent
     if(!pParent)
     {
+      Ogre::LogManager::getSingleton().logMessage("CAM - NO Parent "+name);
         Ogre::SceneNode* pNode = mAttachNode->createChildSceneNode();
 	pNode->setName(name);
         pNode->setPosition(pCamera->getPosition());
         pNode->setOrientation(pCamera->getOrientation());
         pNode->scale(1,1,1);
+    }else{
+      Ogre::LogManager::getSingleton().logMessage("CAM - Parent "+name);
+
+      Ogre::Quaternion q = pParent->getOrientation();
+      std::ostringstream ostr;
+      ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
+      Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
+      Ogre::Quaternion q2;
+      q2.w = 0.720;
+      q2.x = -0.720;
+      q2.y = 0;
+      q2.z = 0;
+
+      pCamera->setOrientation(q*q2);
+      pParent->setOrientation(1,0,0,0);
     }
+	//pCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	//pCamera->setNearClipDistance(0.2f);
+	//pCamera->setFarClipDistance(1000.0f);
+    pCamera->setAutoAspectRatio(true);
+    
 }
  
 void DotSceneLoader::processNode(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)

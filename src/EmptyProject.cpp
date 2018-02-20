@@ -8,7 +8,9 @@
 #include "OgreRenderWindow.h"
 #include "OgreConfigFile.h"
 #include "Compositor/OgreCompositorManager2.h"
+#include "Compositor/OgreCompositorWorkspace.h"
 
+#include "OgreLogManager.h"
 //Declares WinMain / main
 #include "MainEntryPointHelper.h"
 #include "System/MainEntryPoints.h"
@@ -41,12 +43,15 @@ namespace Demo
         virtual Ogre::CompositorWorkspace* setupCompositor()
         {
 	  
-	  // see ../Data/scripts/Compositors/EmptyProject.compositor permit shadow casting
-	  Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
-	  return compositorManager->addWorkspace( mSceneManager, mRenderWindow, mCamera,
-                                                    "EmptyProjectWorkspace", true );
+		  // see ../Data/scripts/Compositors/EmptyProject.compositor permit shadow casting
+		  Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
+		  Ogre::CompositorWorkspace* cw = compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
+			  "EmptyProjectWorkspace", false);
+		  //mCompositorWorkspaces.push_back(cw);
+		  return cw;
 
         }
+
 
         virtual void setupResources(void)
         {
@@ -158,6 +163,7 @@ namespace Demo
             }
 #endif
         }
+		
     };
 
     void MainEntryPoints::createSystems( GameState **outGraphicsGameState,
@@ -169,12 +175,14 @@ namespace Demo
         "Empty Project Example" );
 
         GraphicsSystem *graphicsSystem = new EmptyProjectGraphicsSystem( gfxGameState );
-
+		
         gfxGameState->_notifyGraphicsSystem( graphicsSystem );
 
         *outGraphicsGameState = gfxGameState;
         *outGraphicsSystem = graphicsSystem;
     }
+
+	
 
     void MainEntryPoints::destroySystems( GameState *graphicsGameState,
                                           GraphicsSystem *graphicsSystem,

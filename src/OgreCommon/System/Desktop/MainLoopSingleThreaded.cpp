@@ -61,6 +61,7 @@ int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
     try
     {
         graphicsSystem->initialize( getWindowTitle() );
+		
         if( logicSystem )
             logicSystem->initialize();
 
@@ -76,6 +77,8 @@ int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
             return 0; //User cancelled config
         }
 
+		
+
         Ogre::RenderWindow *renderWindow = graphicsSystem->getRenderWindow();
 
         graphicsSystem->createScene01();
@@ -85,6 +88,9 @@ int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
         graphicsSystem->createScene02();
         if( logicSystem )
             logicSystem->createScene02();
+
+		
+		graphicsGameState->setupAfterSceneLoaded();
 
     #if OGRE_USE_SDL2
         //Do this after creating the scene for easier the debugging (the mouse doesn't hide itself)

@@ -27,6 +27,8 @@ namespace Demo
 
         void update( float timeSinceLast );
 
+		void switchCamera();
+
         /// Returns true if we've handled the event
         bool keyPressed( const SDL_KeyboardEvent &arg );
         /// Returns true if we've handled the event
