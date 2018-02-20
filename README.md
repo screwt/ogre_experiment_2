@@ -6,10 +6,10 @@ Tool to load scene exported from blender with the blender2ogre export addon:
 
 ## Roadmap
 
- * Load a simple scene exported from blender : DONE
- * Allow switching to camera defined in blender : IN_PROGRESS
- * Allow character loading from blender (Blender Custom attribute make it a character) : IN_PROGRESS
- * Allow character controlling : IN_PROGRESS
+ * DONE : Load a simple scene exported from blender
+ * DONE : Allow switching to camera defined in blender
+ * IN_PROGRESS : Allow character loading from blender (Blender Custom attribute make it a character)
+ * IN_PROGRESS : Allow character controlling
 
 ## Startup calls graph
 ![call graph](https://raw.githubusercontent.com/screwt/ogre_experiment_2/develop/doc/media/uml_startup_calls.png)
