@@ -437,7 +437,7 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
       std::ostringstream ostr;
       ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
       Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
-      pCamera->setOrientation(q);
+      //pCamera->setOrientation(q);
     }
  
     // Process normal (?)
@@ -476,8 +476,13 @@ void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
       std::ostringstream ostr;
       ostr << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
       Ogre::LogManager::getSingleton().logMessage("set Cam orientation:"+ostr.str());
+      Ogre::Quaternion q2;
+      q2.w = 0.720;
+      q2.x = -0.720;
+      q2.y = 0;
+      q2.z = 0;
 
-      pCamera->setOrientation(pParent->getOrientation());
+      pCamera->setOrientation(q*q2);
       pParent->setOrientation(1,0,0,0);
     }
 	//pCamera->lookAt(Ogre::Vector3(0, 0, 0));
