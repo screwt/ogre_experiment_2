@@ -1,5 +1,5 @@
 
-hlms Material pbs 
+hlms Material.005 pbs 
 {
 	roughness	0.4
 	fresnel		1.33

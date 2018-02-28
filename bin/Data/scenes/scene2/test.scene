@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- exporter: blender2ogre 0.7.0 -->
-<!-- export_time: Tue, 20 Feb 2018 11:58:26 +0000 -->
-<!-- previous_export_time: Tue, 20 Feb 2018 11:57:09 +0000 -->
+<!-- export_time: Wed, 28 Feb 2018 08:40:07 +0000 -->
+<!-- previous_export_time: Wed, 28 Feb 2018 08:17:36 +0000 -->
 <scene author="bjuin" formatVersion="1.1" >
   <nodes >
     <node name="Hemi" >
-      <position x="-3.735249" y="3.543775" z="3.965579" />
+      <position x="2.398546" y="3.543775" z="3.965579" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
     </node>
@@ -225,11 +225,11 @@
       </camera>
     </node>
     <node name="Point.000" >
-      <position x="-2.933089" y="0.315908" z="-0.000000" />
+      <position x="-2.933089" y="0.315908" z="-2.858065" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
       <light name="Point.000" powerScale="4.489999771118164" type="point" >
-        <position x="-2.933089" y="0.315908" z="-0.000000" />
+        <position x="-2.933089" y="0.315908" z="-2.858065" />
         <colourDiffuse b="1.0" g="1.0" r="1.0" />
         <colourSpecular b="1.0" g="1.0" r="1.0" />
         <lightAttenuation constant="1.0" linear="0.03988831320993008" quadratic="0.0" range="5000" />
@@ -238,19 +238,19 @@
   </nodes>
   <externals >
     <item type="material" >
-      <file name="Material.007" />
+      <file name="Material.003" />
     </item>
     <item type="material" >
       <file name="Material.004" />
+    </item>
+    <item type="material" >
+      <file name="Material.007" />
     </item>
     <item type="material" >
       <file name="Material.002" />
     </item>
     <item type="material" >
       <file name="Material.005" />
-    </item>
-    <item type="material" >
-      <file name="Material.003" />
     </item>
   </externals>
   <environment />

@@ -98,8 +98,7 @@ namespace Demo
     mActiveWorkspace++;
     if (mActiveWorkspace == mCompositorWorkspaces.end())
       mActiveWorkspace = mCompositorWorkspaces.begin();
-    
-    
+       
     ws = *mActiveWorkspace;
     ws->setEnabled(true);
     mGraphicsSystem->setCamera(ws->getDefaultCamera());
@@ -111,27 +110,20 @@ namespace Demo
     ostr << "\n    Parent orientation:" << q.w <<  "/" << q.x << "/" << q.y << "/" << q.z;
     Ogre::LogManager::getSingleton()
       .logMessage(ostr.str() );
-
-    //mGraphicsSystem->getRoot()->getCompositorManager2();
-    //mGraphicsSystem->switchWorkSpace();
-    //mGraphicsSystem ->getSceneManager()->get
-    //Ogre::SceneManager::CameraIterator camNodesIterator = mSceneManager->getCameraIterator();
-    //switchWorkSpace();
   }
   
-    //-----------------------------------------------------------------------------------
-	void EmptyProjectGameState::keyReleased( const SDL_KeyboardEvent &arg )
-    {
-		if (arg.keysym.sym == SDLK_c) {
-			EmptyProjectGameState::switchWorkspace();
-			
-		}
-		else if ((arg.keysym.mod & ~(KMOD_NUM | KMOD_CAPS)) != 0)
-        {
-            TutorialGameState::keyReleased( arg );
-            return;
-        }
-
-		TutorialGameState::keyReleased( arg );
+  //-----------------------------------------------------------------------------------
+  void EmptyProjectGameState::keyReleased( const SDL_KeyboardEvent &arg )
+  {
+    if (arg.keysym.sym == SDLK_c) {
+      EmptyProjectGameState::switchWorkspace();  
+    }else if (arg.keysym.sym == SDLK_n){
+      EmptyProjectGameState::switchScene();
+    }else if ((arg.keysym.mod & ~(KMOD_NUM | KMOD_CAPS)) != 0){
+      TutorialGameState::keyReleased( arg );
+      return;
     }
+
+    TutorialGameState::keyReleased( arg );
+  }
 }

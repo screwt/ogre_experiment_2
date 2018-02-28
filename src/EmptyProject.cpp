@@ -70,6 +70,10 @@ namespace Demo
             dataFolder += "2.0/scripts/materials/PbsMaterials";
 
             addResourceLocation( dataFolder, "FileSystem", "General" );
+            
+            //-- default scene loading
+            Ogre::ResourceGroupManager::getSingleton().addResourceLocation( "../Data/scenes/scene1", "FileSystem", "SCENE" );
+            
         }
 
     public:
