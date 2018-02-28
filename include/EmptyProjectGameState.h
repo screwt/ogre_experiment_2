@@ -30,7 +30,9 @@ namespace Demo
 
         virtual void keyReleased( const SDL_KeyboardEvent &arg );
 
-		void switchWorkspace();
+        void switchWorkspace();
+        
+        void switchScene();
 		
     };
 }

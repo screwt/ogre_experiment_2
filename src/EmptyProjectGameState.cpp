@@ -112,6 +112,11 @@ namespace Demo
       .logMessage(ostr.str() );
   }
   
+
+  void EmptyProjectGameState::switchScene() {
+    Ogre::LogManager::getSingleton().logMessage("switchScene");
+  }
+
   //-----------------------------------------------------------------------------------
   void EmptyProjectGameState::keyReleased( const SDL_KeyboardEvent &arg )
   {
