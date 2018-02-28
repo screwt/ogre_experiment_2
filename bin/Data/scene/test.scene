@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- exporter: blender2ogre 0.7.0 -->
-<!-- export_time: Tue, 20 Feb 2018 11:21:11 +0000 -->
-<!-- previous_export_time: Tue, 20 Feb 2018 11:20:17 +0000 -->
+<!-- export_time: Tue, 20 Feb 2018 11:58:26 +0000 -->
+<!-- previous_export_time: Tue, 20 Feb 2018 11:57:09 +0000 -->
 <scene author="bjuin" formatVersion="1.1" >
   <nodes >
+    <node name="Hemi" >
+      <position x="-3.735249" y="3.543775" z="3.965579" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+    </node>
     <node name="Cone.003" >
-      <position x="-3.685017" y="2.234756" z="-0.000000" />
+      <position x="-5.242593" y="1.229801" z="-0.000000" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
       <entity meshFile="Cone.003.mesh" name="Cone.003" >
@@ -218,6 +223,17 @@
       <camera fov="0.5033799435163735" name="CAM_FINAL.001" projectionType="perspective" >
         <clipping far="100.0" near="0.10000000149011612" />
       </camera>
+    </node>
+    <node name="Point.000" >
+      <position x="-2.933089" y="0.315908" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <light name="Point.000" powerScale="4.489999771118164" type="point" >
+        <position x="-2.933089" y="0.315908" z="-0.000000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <lightAttenuation constant="1.0" linear="0.03988831320993008" quadratic="0.0" range="5000" />
+      </light>
     </node>
   </nodes>
   <externals >
