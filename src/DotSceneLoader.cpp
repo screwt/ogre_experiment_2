@@ -25,12 +25,18 @@ DotSceneLoader::~DotSceneLoader()
   //  OGRE_DELETE mTerrainGlobalOptions;
 }
  
-void DotSceneLoader::parseDotScene(const Ogre::String &SceneName, const Ogre::String &groupName, Ogre::SceneManager *yourSceneMgr, Ogre::SceneNode *pAttachNode, const Ogre::String &sPrependNode)
+void DotSceneLoader::parseDotScene(const Ogre::String &SceneName, 
+                                   const Ogre::String &pathPrefix,
+                                   const Ogre::String &groupName, 
+                                   Ogre::SceneManager *yourSceneMgr, 
+                                   Ogre::SceneNode *pAttachNode, 
+                                   const Ogre::String &sPrependNode)
 {
     // set up shared object values
     m_sGroupName = groupName;
     mSceneMgr = yourSceneMgr;
     m_sPrependNode = sPrependNode;
+    m_pathPrefix = pathPrefix;
     staticObjects.clear();
     dynamicObjects.clear();
 	camerasNodes.clear();
@@ -768,6 +774,9 @@ void DotSceneLoader::processItem(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode 
     bool isStatic = getAttribBool(XMLNode, "static", false);;
     bool castShadows = getAttribBool(XMLNode, "castShadows", true);
  
+    meshFile = m_pathPrefix+meshFile;
+
+
     // TEMP: Maintain a list of static and dynamic objects
     if(isStatic)
         staticObjects.push_back(name);

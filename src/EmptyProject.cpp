@@ -72,7 +72,7 @@ namespace Demo
             addResourceLocation( dataFolder, "FileSystem", "General" );
             
             //-- default scene loading
-            Ogre::ResourceGroupManager::getSingleton().addResourceLocation( "../Data/scenes/scene1", "FileSystem", "SCENE" );
+            Ogre::ResourceGroupManager::getSingleton().addResourceLocation( "../Data/scenes/", "FileSystem", "SCENES" , true);
             
         }
 

@@ -43,7 +43,12 @@
         DotSceneLoader();
         virtual ~DotSceneLoader();
  
-        void parseDotScene(const Ogre::String &SceneName, const Ogre::String &groupName, Ogre::SceneManager *yourSceneMgr, Ogre::SceneNode *pAttachNode = NULL, const Ogre::String &sPrependNode = "");
+        void parseDotScene(const Ogre::String &SceneName, 
+                           const Ogre::String &groupName, 
+                           const Ogre::String &pathPrefix,
+                           Ogre::SceneManager *yourSceneMgr, 
+                           Ogre::SceneNode *pAttachNode = NULL, 
+                           const Ogre::String &sPrependNode = "");
         Ogre::String getProperty(const Ogre::String &ndNm, const Ogre::String &prop);
  
         //Ogre::TerrainGroup* getTerrainGroup() { return mTerrainGroup; }
@@ -100,6 +105,7 @@
         Ogre::SceneNode *mAttachNode;
         Ogre::String m_sGroupName;
         Ogre::String m_sPrependNode;
+        Ogre::String m_pathPrefix;
         //Ogre::TerrainGroup* mTerrainGroup;
         Ogre::Vector3 mTerrainPosition;
         Ogre::Vector3 mLightDirection;

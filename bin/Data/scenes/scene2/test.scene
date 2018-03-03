@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- exporter: blender2ogre 0.7.0 -->
-<!-- export_time: Wed, 28 Feb 2018 08:40:07 +0000 -->
-<!-- previous_export_time: Wed, 28 Feb 2018 08:17:36 +0000 -->
+<!-- export_time: Fri, 02 Mar 2018 11:10:01 +0000 -->
+<!-- previous_export_time: Mon, 19 Feb 2018 18:48:21 +0000 -->
 <scene author="bjuin" formatVersion="1.1" >
   <nodes >
-    <node name="Hemi" >
-      <position x="2.398546" y="3.543775" z="3.965579" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+    <node name="MAIN_CAM_COPY" >
+      <position x="10.000000" y="5.000000" z="-15.000000" />
+      <rotation qw="0.264533" qx="0.233217" qy="0.701918" qz="-0.618824" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
+      <camera fov="0.5033799435163735" name="MAIN_CAM_COPY" projectionType="perspective" >
+        <clipping far="100.0" near="0.10000000149011612" />
+      </camera>
     </node>
-    <node name="Cone.003" >
-      <position x="-5.242593" y="1.229801" z="-0.000000" />
+    <node name="Camera.003" >
+      <position x="0.000000" y="12.052654" z="-0.000000" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <entity meshFile="Cone.003.mesh" name="Cone.003" >
+      <camera fov="0.5033799435163735" name="Camera.003" projectionType="perspective" >
+        <clipping far="100.0" near="0.10000000149011612" />
+      </camera>
+    </node>
+    <node name="Camera.002" >
+      <position x="0.000000" y="13.750000" z="-0.000000" />
+      <rotation qw="0.000617" qx="0.000617" qy="0.707107" qz="-0.707107" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <camera fov="0.5033799435163735" name="Camera.002" projectionType="perspective" >
+        <clipping far="100.0" near="0.10000000149011612" />
+      </camera>
+    </node>
+    <node name="Cube.001" >
+      <position x="-2.613735" y="3.115629" z="-1.632968" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="0.276334" y="0.276334" z="0.276334" />
+      <entity meshFile="Cube.001.mesh" name="Cube.001" >
         <userData >
           <property data="1.0" name="mass" type="float" />
           <property data="1.0" name="mass_radius" type="float" />
@@ -38,220 +57,156 @@
         </userData>
       </entity>
     </node>
-    <node name="CAM_FINAL" >
-      <position x="7.688583" y="3.979760" z="6.750311" />
-      <rotation qw="0.766278" qx="0.380124" qy="0.464040" qz="-0.230197" />
+    <node name="Cone" >
+      <position x="-0.727911" y="3.553712" z="-1.644485" />
+      <rotation qw="0.353553" qx="0.146447" qy="0.353553" qz="0.853553" />
+      <scale x="0.436315" y="0.840153" z="0.436315" />
+      <entity meshFile="Cone.mesh" name="Cone" >
+        <userData >
+          <property data="1.0" name="mass" type="float" />
+          <property data="1.0" name="mass_radius" type="float" />
+          <property data="STATIC" name="physics_type" type="str" />
+          <property data="False" name="actor" type="bool" />
+          <property data="False" name="ghost" type="bool" />
+          <property data="0.0" name="velocity_min" type="float" />
+          <property data="0.0" name="velocity_max" type="float" />
+          <property data="False" name="lock_trans_x" type="bool" />
+          <property data="False" name="lock_trans_y" type="bool" />
+          <property data="False" name="lock_trans_z" type="bool" />
+          <property data="False" name="lock_rot_x" type="bool" />
+          <property data="False" name="lock_rot_y" type="bool" />
+          <property data="False" name="lock_rot_z" type="bool" />
+          <property data="False" name="anisotropic_friction" type="bool" />
+          <property data="1.0" name="friction_x" type="float" />
+          <property data="1.0" name="friction_y" type="float" />
+          <property data="1.0" name="friction_z" type="float" />
+          <property data="0.03999999910593033" name="damping_trans" type="float" />
+          <property data="0.10000000149011612" name="damping_rot" type="float" />
+          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
+        </userData>
+      </entity>
+    </node>
+    <node name="Camera.001" >
+      <position x="5.475882" y="3.503900" z="-2.856896" />
+      <rotation qw="0.446495" qx="0.243145" qy="0.756254" qz="-0.411828" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <camera fov="0.5033799435163735" name="Camera.001" projectionType="perspective" >
+        <clipping far="100.0" near="0.10000000149011612" />
+      </camera>
+    </node>
+    <node name="Plane" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="4.236272" y="4.236272" z="4.236272" />
+      <userData >
+        <property data='&lt;bpy id prop: owner="OBPlane", name="cycles", address=0x7f9e42a172e8&gt;' name="cycles" type="IDPropertyGroup" />
+        <property data='&lt;bpy id prop: owner="OBPlane", name="cycles_visibility", address=0x7f9e42a17568&gt;' name="cycles_visibility" type="IDPropertyGroup" />
+      </userData>
+      <entity meshFile="Plane.mesh" name="Plane" >
+        <userData >
+          <property data="1.0" name="mass" type="float" />
+          <property data="1.0" name="mass_radius" type="float" />
+          <property data="STATIC" name="physics_type" type="str" />
+          <property data="False" name="actor" type="bool" />
+          <property data="False" name="ghost" type="bool" />
+          <property data="0.0" name="velocity_min" type="float" />
+          <property data="0.0" name="velocity_max" type="float" />
+          <property data="False" name="lock_trans_x" type="bool" />
+          <property data="False" name="lock_trans_y" type="bool" />
+          <property data="False" name="lock_trans_z" type="bool" />
+          <property data="False" name="lock_rot_x" type="bool" />
+          <property data="False" name="lock_rot_y" type="bool" />
+          <property data="False" name="lock_rot_z" type="bool" />
+          <property data="False" name="anisotropic_friction" type="bool" />
+          <property data="1.0" name="friction_x" type="float" />
+          <property data="1.0" name="friction_y" type="float" />
+          <property data="1.0" name="friction_z" type="float" />
+          <property data="0.03999999910593033" name="damping_trans" type="float" />
+          <property data="0.10000000149011612" name="damping_rot" type="float" />
+          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
+        </userData>
+      </entity>
+    </node>
+    <node name="Cube" >
+      <position x="-2.144605" y="1.998411" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
       <userData >
-        <property data="CAM_FINAL" name="name" type="str" />
+        <property data='&lt;bpy id prop: owner="OBCube", name="cycles", address=0x7f9e42a159e8&gt;' name="cycles" type="IDPropertyGroup" />
+        <property data='&lt;bpy id prop: owner="OBCube", name="cycles_visibility", address=0x7f9e42a15a88&gt;' name="cycles_visibility" type="IDPropertyGroup" />
       </userData>
-      <camera fov="0.5033799435163735" name="CAM_FINAL" projectionType="perspective" >
-        <clipping far="100.0" near="0.10000000149011612" />
-      </camera>
+      <entity meshFile="Cube.mesh" name="Cube" >
+        <userData >
+          <property data="1.0" name="mass" type="float" />
+          <property data="1.0" name="mass_radius" type="float" />
+          <property data="STATIC" name="physics_type" type="str" />
+          <property data="False" name="actor" type="bool" />
+          <property data="False" name="ghost" type="bool" />
+          <property data="0.0" name="velocity_min" type="float" />
+          <property data="0.0" name="velocity_max" type="float" />
+          <property data="False" name="lock_trans_x" type="bool" />
+          <property data="False" name="lock_trans_y" type="bool" />
+          <property data="False" name="lock_trans_z" type="bool" />
+          <property data="False" name="lock_rot_x" type="bool" />
+          <property data="False" name="lock_rot_y" type="bool" />
+          <property data="False" name="lock_rot_z" type="bool" />
+          <property data="False" name="anisotropic_friction" type="bool" />
+          <property data="1.0" name="friction_x" type="float" />
+          <property data="1.0" name="friction_y" type="float" />
+          <property data="1.0" name="friction_z" type="float" />
+          <property data="0.02539999969303608" name="damping_trans" type="float" />
+          <property data="0.1589999943971634" name="damping_rot" type="float" />
+          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
+        </userData>
+      </entity>
     </node>
-    <node name="Camera.005" >
-      <position x="-0.009996" y="9.713932" z="-0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+    <node name="Lamp" >
+      <position x="-0.323755" y="3.189740" z="3.276325" />
+      <rotation qw="0.570947" qx="0.169076" qy="0.755880" qz="-0.272171" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <camera fov="0.5033799435163735" name="Camera.005" projectionType="perspective" >
-        <clipping far="100.0" near="0.10000000149011612" />
-      </camera>
-    </node>
-    <node name="Cone.002" >
-      <position x="-1.249931" y="3.220778" z="1.163237" />
-      <rotation qw="0.484300" qx="-0.500888" qy="0.036567" qz="-0.716399" />
-      <scale x="0.360888" y="0.918834" z="0.360888" />
-      <entity meshFile="Cone.002.mesh" name="Cone.002" >
-        <userData >
-          <property data="1.0" name="mass" type="float" />
-          <property data="1.0" name="mass_radius" type="float" />
-          <property data="STATIC" name="physics_type" type="str" />
-          <property data="False" name="actor" type="bool" />
-          <property data="False" name="ghost" type="bool" />
-          <property data="0.0" name="velocity_min" type="float" />
-          <property data="0.0" name="velocity_max" type="float" />
-          <property data="False" name="lock_trans_x" type="bool" />
-          <property data="False" name="lock_trans_y" type="bool" />
-          <property data="False" name="lock_trans_z" type="bool" />
-          <property data="False" name="lock_rot_x" type="bool" />
-          <property data="False" name="lock_rot_y" type="bool" />
-          <property data="False" name="lock_rot_z" type="bool" />
-          <property data="False" name="anisotropic_friction" type="bool" />
-          <property data="1.0" name="friction_x" type="float" />
-          <property data="1.0" name="friction_y" type="float" />
-          <property data="1.0" name="friction_z" type="float" />
-          <property data="0.03999999910593033" name="damping_trans" type="float" />
-          <property data="0.10000000149011612" name="damping_rot" type="float" />
-          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
-        </userData>
-      </entity>
-    </node>
-    <node name="Plane.001" >
-      <position x="0.000000" y="0.000000" z="-0.000000" />
-      <rotation qw="0.000000" qx="0.000000" qy="1.000000" qz="-0.000000" />
-      <scale x="9.018783" y="9.018783" z="9.018783" />
-      <entity meshFile="Plane.001.mesh" name="Plane.001" >
-        <userData >
-          <property data="1.0" name="mass" type="float" />
-          <property data="1.0" name="mass_radius" type="float" />
-          <property data="STATIC" name="physics_type" type="str" />
-          <property data="False" name="actor" type="bool" />
-          <property data="False" name="ghost" type="bool" />
-          <property data="0.0" name="velocity_min" type="float" />
-          <property data="0.0" name="velocity_max" type="float" />
-          <property data="False" name="lock_trans_x" type="bool" />
-          <property data="False" name="lock_trans_y" type="bool" />
-          <property data="False" name="lock_trans_z" type="bool" />
-          <property data="False" name="lock_rot_x" type="bool" />
-          <property data="False" name="lock_rot_y" type="bool" />
-          <property data="False" name="lock_rot_z" type="bool" />
-          <property data="False" name="anisotropic_friction" type="bool" />
-          <property data="1.0" name="friction_x" type="float" />
-          <property data="1.0" name="friction_y" type="float" />
-          <property data="1.0" name="friction_z" type="float" />
-          <property data="0.03999999910593033" name="damping_trans" type="float" />
-          <property data="0.10000000149011612" name="damping_rot" type="float" />
-          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
-        </userData>
-      </entity>
-    </node>
-    <node name="Cube.002" >
-      <position x="5.755263" y="0.642817" z="-0.317336" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
-      <scale x="0.368283" y="0.368283" z="0.368283" />
-      <entity meshFile="Cube.002.mesh" name="Cube.002" >
-        <userData >
-          <property data="1.0" name="mass" type="float" />
-          <property data="1.0" name="mass_radius" type="float" />
-          <property data="STATIC" name="physics_type" type="str" />
-          <property data="False" name="actor" type="bool" />
-          <property data="False" name="ghost" type="bool" />
-          <property data="0.0" name="velocity_min" type="float" />
-          <property data="0.0" name="velocity_max" type="float" />
-          <property data="False" name="lock_trans_x" type="bool" />
-          <property data="False" name="lock_trans_y" type="bool" />
-          <property data="False" name="lock_trans_z" type="bool" />
-          <property data="False" name="lock_rot_x" type="bool" />
-          <property data="False" name="lock_rot_y" type="bool" />
-          <property data="False" name="lock_rot_z" type="bool" />
-          <property data="False" name="anisotropic_friction" type="bool" />
-          <property data="1.0" name="friction_x" type="float" />
-          <property data="1.0" name="friction_y" type="float" />
-          <property data="1.0" name="friction_z" type="float" />
-          <property data="0.03999999910593033" name="damping_trans" type="float" />
-          <property data="0.10000000149011612" name="damping_rot" type="float" />
-          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
-        </userData>
-      </entity>
-    </node>
-    <node name="Cone.001" >
-      <position x="0.000000" y="1.285114" z="-0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <entity meshFile="Cone.001.mesh" name="Cone.001" >
-        <userData >
-          <property data="1.0" name="mass" type="float" />
-          <property data="1.0" name="mass_radius" type="float" />
-          <property data="STATIC" name="physics_type" type="str" />
-          <property data="False" name="actor" type="bool" />
-          <property data="False" name="ghost" type="bool" />
-          <property data="0.0" name="velocity_min" type="float" />
-          <property data="0.0" name="velocity_max" type="float" />
-          <property data="False" name="lock_trans_x" type="bool" />
-          <property data="False" name="lock_trans_y" type="bool" />
-          <property data="False" name="lock_trans_z" type="bool" />
-          <property data="False" name="lock_rot_x" type="bool" />
-          <property data="False" name="lock_rot_y" type="bool" />
-          <property data="False" name="lock_rot_z" type="bool" />
-          <property data="False" name="anisotropic_friction" type="bool" />
-          <property data="1.0" name="friction_x" type="float" />
-          <property data="1.0" name="friction_y" type="float" />
-          <property data="1.0" name="friction_z" type="float" />
-          <property data="0.03999999910593033" name="damping_trans" type="float" />
-          <property data="0.10000000149011612" name="damping_rot" type="float" />
-          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
-        </userData>
-      </entity>
-    </node>
-    <node name="Cube.003" >
-      <position x="0.000000" y="0.642817" z="-5.118577" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
-      <scale x="0.368283" y="0.368283" z="0.368283" />
-      <entity meshFile="Cube.003.mesh" name="Cube.003" >
-        <userData >
-          <property data="1.0" name="mass" type="float" />
-          <property data="1.0" name="mass_radius" type="float" />
-          <property data="STATIC" name="physics_type" type="str" />
-          <property data="False" name="actor" type="bool" />
-          <property data="False" name="ghost" type="bool" />
-          <property data="0.0" name="velocity_min" type="float" />
-          <property data="0.0" name="velocity_max" type="float" />
-          <property data="False" name="lock_trans_x" type="bool" />
-          <property data="False" name="lock_trans_y" type="bool" />
-          <property data="False" name="lock_trans_z" type="bool" />
-          <property data="False" name="lock_rot_x" type="bool" />
-          <property data="False" name="lock_rot_y" type="bool" />
-          <property data="False" name="lock_rot_z" type="bool" />
-          <property data="False" name="anisotropic_friction" type="bool" />
-          <property data="1.0" name="friction_x" type="float" />
-          <property data="1.0" name="friction_y" type="float" />
-          <property data="1.0" name="friction_z" type="float" />
-          <property data="0.03999999910593033" name="damping_trans" type="float" />
-          <property data="0.10000000149011612" name="damping_rot" type="float" />
-          <property data="0.4000000059604645" name="inertia_tensor" type="float" />
-        </userData>
-      </entity>
-    </node>
-    <node name="Point.001" >
-      <position x="2.606175" y="5.569361" z="-0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <light name="Point.001" powerScale="5.289999961853027" type="point" >
-        <position x="2.606175" y="5.569361" z="-0.000000" />
-        <colourDiffuse b="1.0" g="1.0" r="1.0" />
-        <colourSpecular b="1.0" g="1.0" r="1.0" />
-        <lightAttenuation constant="1.0" linear="0.03988831320993008" quadratic="0.0" range="5000" />
+      <userData >
+        <property data='&lt;bpy id prop: owner="OBLamp", name="cycles_visibility", address=0x7f9e42a16de8&gt;' name="cycles_visibility" type="IDPropertyGroup" />
+      </userData>
+      <light name="Lamp" powerScale="1.0" type="point" >
+        <position x="-0.323755" y="3.189740" z="3.276325" />
+        <colourDiffuse b="1.0" g="0.11650196462869644" r="0.19596512615680695" />
+        <colourSpecular b="1.0" g="0.11650196462869644" r="0.19596512615680695" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
       </light>
     </node>
-    <node name="CAM_FINAL.001" >
-      <position x="4.349272" y="3.979760" z="-5.236340" />
-      <rotation qw="0.350057" qx="0.173649" qy="0.824606" qz="-0.409060" />
+    <node name="Camera" >
+      <position x="7.481132" y="5.343665" z="6.507640" />
+      <rotation qw="0.780483" qx="0.483536" qy="0.336872" qz="-0.208704" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <userData >
-        <property data="CAM_FINAL" name="name" type="str" />
-      </userData>
-      <camera fov="0.5033799435163735" name="CAM_FINAL.001" projectionType="perspective" >
+      <camera fov="0.5033799435163735" name="Camera" projectionType="perspective" >
         <clipping far="100.0" near="0.10000000149011612" />
       </camera>
     </node>
-    <node name="Point.000" >
-      <position x="-2.933089" y="0.315908" z="-2.858065" />
-      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+    <node name="Lamp.001" >
+      <position x="4.076245" y="5.903862" z="-1.005454" />
+      <rotation qw="0.570947" qx="0.169076" qy="0.755880" qz="-0.272171" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <light name="Point.000" powerScale="4.489999771118164" type="point" >
-        <position x="-2.933089" y="0.315908" z="-2.858065" />
-        <colourDiffuse b="1.0" g="1.0" r="1.0" />
-        <colourSpecular b="1.0" g="1.0" r="1.0" />
-        <lightAttenuation constant="1.0" linear="0.03988831320993008" quadratic="0.0" range="5000" />
+      <userData >
+        <property data='&lt;bpy id prop: owner="OBLamp.001", name="cycles_visibility", address=0x7f9e42a171a8&gt;' name="cycles_visibility" type="IDPropertyGroup" />
+      </userData>
+      <light name="Lamp.001" powerScale="1.0" type="point" >
+        <position x="4.076245" y="5.903862" z="-1.005454" />
+        <colourDiffuse b="0.14186015725135803" g="0.1327645182609558" r="1.0" />
+        <colourSpecular b="0.14186015725135803" g="0.1327645182609558" r="1.0" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
       </light>
     </node>
   </nodes>
   <externals >
     <item type="material" >
-      <file name="Material.003" />
+      <file name="Material.001" />
     </item>
     <item type="material" >
-      <file name="Material.004" />
-    </item>
-    <item type="material" >
-      <file name="Material.007" />
-    </item>
-    <item type="material" >
-      <file name="Material.002" />
-    </item>
-    <item type="material" >
-      <file name="Material.005" />
+      <file name="Material" />
     </item>
   </externals>
-  <environment />
+  <environment >
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
 </scene>

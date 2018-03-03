@@ -48,7 +48,7 @@ namespace Demo
     mCameraController = new CameraController( mGraphicsSystem, false );
     Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
     mLoader = new DotSceneLoader();
-    mLoader->parseDotScene("test.scene", "General", sceneManager);
+    mLoader->parseDotScene("scene1/test.scene","scene1/", "General", sceneManager);
     TutorialGameState::createScene01();
   }
 	
@@ -115,6 +115,16 @@ namespace Demo
 
   void EmptyProjectGameState::switchScene() {
     Ogre::LogManager::getSingleton().logMessage("switchScene");
+
+    mGraphicsSystem->getSceneManager()->clearScene(true);
+    //mGraphicsSystem->getSceneManager()->destroyAllCameras();
+    Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
+    mLoader->parseDotScene("scene2/test.scene","scene2/", "General", sceneManager);
+    
+    //new_scene_folder = 
+
+    //Ogre::ResourceGroupManager::getSingleton().addResourceLocation( "../Data/scenes/"+new_scene_folder, "FileSystem", "new_scene_folder" );
+    //mLoader->parseDotScene("test.scene", "General", mGraphicsSystem->mSceneManager);    
   }
 
   //-----------------------------------------------------------------------------------
