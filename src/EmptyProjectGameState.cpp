@@ -116,15 +116,21 @@ namespace Demo
   void EmptyProjectGameState::switchScene() {
     Ogre::LogManager::getSingleton().logMessage("switchScene");
 
-    mGraphicsSystem->getSceneManager()->clearScene(true);
+	Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
+	ws->setEnabled(false);
+
+	mActiveWorkspace = mCompositorWorkspaces.begin();
+	for (mActiveWorkspace = mCompositorWorkspaces.begin(); mActiveWorkspace != mCompositorWorkspaces.end(); mActiveWorkspace++) {
+		Ogre::CompositorWorkspace* ws = *mActiveWorkspace;
+		//delete ws;
+	}
+
+	mCompositorWorkspaces.clear();
+    mGraphicsSystem->getSceneManager()->clearScene(false,true);
     //mGraphicsSystem->getSceneManager()->destroyAllCameras();
     Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();	
     mLoader->parseDotScene("scene2/test.scene","scene2/", "General", sceneManager);
-    
-    //new_scene_folder = 
-
-    //Ogre::ResourceGroupManager::getSingleton().addResourceLocation( "../Data/scenes/"+new_scene_folder, "FileSystem", "new_scene_folder" );
-    //mLoader->parseDotScene("test.scene", "General", mGraphicsSystem->mSceneManager);    
+	setupAfterSceneLoaded();
   }
 
   //-----------------------------------------------------------------------------------
